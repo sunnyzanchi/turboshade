@@ -1,0 +1,21 @@
+{
+  "name": "turboshade",
+  "version": "0.1.0",
+  "description": "Wrapper for making using shaders with WebGL easier",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "shader",
+    "webgl",
+    "image",
+    "processing"
+  ],
+  "author": "Zanchi",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-gsandf": "^1.0.0"
+  }
+}

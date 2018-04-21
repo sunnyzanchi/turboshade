@@ -1,0 +1,6 @@
+{
+  "extends": "gsandf",
+  "rules": {
+    "comma-dangle": ["error", "always-multiline"]
+  }
+}
