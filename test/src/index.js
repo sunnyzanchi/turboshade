@@ -10,6 +10,16 @@ loadImage(img1Url)
   .then(img => {
     canvas.height = img.height;
     canvas.width = img.width;
-    turboshade(gl, shader, img);
+    const render = turboshade(gl, shader, img);
+
+    let i = 0.00001;
+    const draw = () => {
+      render({ u_time: i });
+
+      i += 0.1;
+      requestAnimationFrame(draw);
+    };
+
+    draw();
   })
   .catch(err => console.log(err));

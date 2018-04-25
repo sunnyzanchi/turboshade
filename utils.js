@@ -45,3 +45,22 @@ export const createShader = (gl, type, source) => {
   gl.deleteShader(shader);
   throw log;
 };
+
+const isInteger = num => Number.isInteger(num);
+
+export const getUniformMethod = data => {
+  if (Array.isArray(data)) {
+    if (data.length > 4) {
+      throw Error('Uniforms can take a maximum of 4 values');
+    }
+    if (data.every(isInteger)) {
+      return `uniform${data.length}i`;
+    }
+    return `uniform${data.length}f`;
+  }
+
+  if (isInteger(data)) {
+    return `uniform1i`;
+  }
+  return `uniform1f`;
+};

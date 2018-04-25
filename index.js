@@ -1,4 +1,4 @@
-import { createBuffer, createProgram, createShader } from './utils';
+import { createBuffer, createProgram, createShader, getUniformMethod } from './utils';
 
 const vertexShaderSource = `
 attribute vec4 a_position;
@@ -83,7 +83,21 @@ const turboshade = (gl, fragShaderSource, image) => {
   gl.clearColor(0, 0, 0, 0);
   gl.clear(gl.COLOR_BUFFER_BIT);
 
-  gl.drawArrays(gl.TRIANGLES, 0, 6);
+  const render = uniforms => {
+    Object.entries(uniforms).forEach(([key, value]) => {
+      const location = gl.getUniformLocation(program, key);
+      const method = getUniformMethod(value);
+      console.log(method, value);
+      if (Array.isArray(value)) {
+        gl[method](location, ...value);
+      } else {
+        gl[method](location, value);
+      }
+    });
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+  };
+
+  return render;
 };
 
 export default turboshade;
